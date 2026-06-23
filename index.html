@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>手机辅助画图</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="stage" class="stage" aria-label="摄像头画面">
+        <video id="camera" class="camera" autoplay muted playsinline></video>
+
+        <div id="emptyState" class="empty-state">
+          <button id="startCamera" class="primary-action" type="button">启动相机</button>
+          <label class="secondary-action">
+            导入图案
+            <input id="imageInput" type="file" accept="image/png,image/jpeg,image/jpg" />
+          </label>
+          <p id="statusText">请先启动相机并导入照片或 PNG</p>
+        </div>
+
+        <div id="patternSurface" class="pattern-surface" hidden>
+          <img id="patternImage" class="pattern-image" alt="导入的图案" draggable="false" />
+          <div id="gridLayer" class="grid-layer" aria-hidden="true"></div>
+        </div>
+
+        <div id="handlesLayer" class="handles-layer" hidden aria-hidden="true">
+          <button class="corner-handle top-left" data-point="0" type="button"></button>
+          <button class="corner-handle top-right" data-point="1" type="button"></button>
+          <button class="corner-handle bottom-right" data-point="2" type="button"></button>
+          <button class="corner-handle bottom-left" data-point="3" type="button"></button>
+        </div>
+      </section>
+
+      <section class="tool-panel" aria-label="图案控制">
+        <div class="tool-row command-row">
+          <button id="cameraButton" type="button">相机</button>
+          <label class="file-button">
+            导入
+            <input id="panelImageInput" type="file" accept="image/png,image/jpeg,image/jpg" />
+          </label>
+          <button id="lockButton" type="button">锁定</button>
+          <button id="resetButton" type="button">重置</button>
+        </div>
+
+        <div class="tool-row toggle-row">
+          <button id="gridButton" type="button" aria-pressed="true">网格</button>
+          <button id="flipXButton" type="button" aria-pressed="false">左右翻转</button>
+          <button id="flipYButton" type="button" aria-pressed="false">上下翻转</button>
+        </div>
+
+        <div class="slider-grid">
+          <label>
+            <span>透明度</span>
+            <input id="opacityRange" type="range" min="10" max="100" value="45" />
+          </label>
+          <label>
+            <span>缩放</span>
+            <input id="scaleRange" type="range" min="25" max="220" value="100" />
+          </label>
+          <label>
+            <span>旋转</span>
+            <input id="rotateRange" type="range" min="-180" max="180" value="0" />
+          </label>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
